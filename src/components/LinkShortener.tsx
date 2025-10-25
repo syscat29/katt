@@ -2,10 +2,10 @@
 
 import { useFormStatus } from 'react-dom'
 import { createShortUrl } from '../server/actions'
-import Scissors from '../components/icons/Scissors'
 import { useLinkStore } from '../lib/store'
+import Scissors from './icons/Scissors'
 
-export default function LinkShortner() {
+export default function LinkShortener() {
   const { addLink } = useLinkStore()
   const { pending } = useFormStatus()
 

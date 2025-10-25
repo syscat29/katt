@@ -1,4 +1,4 @@
-import LinkShortner from '../components/LinkShortner'
+import LinkShortener from '../components/LinkShortener'
 import LinksList from '../components/LinksList'
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
             Transform long URLs into short, shareable links instantly
           </p>
         </div>
-        <LinkShortner />
+        <LinkShortener />
         <LinksList />
       </main>
     </div>
