@@ -1,5 +1,6 @@
 {
-  "name": "url-shortener",
+  "name": "katt",
+  "description": "simple url shortener",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,12 +10,15 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@paralleldrive/cuid2": "^3.1.0",
     "@prisma/client": "^6.18.0",
     "@prisma/extension-accelerate": "^2.0.2",
     "next": "16.0.0",
     "prisma": "^6.18.0",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "zod": "^4.1.12",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

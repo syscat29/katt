@@ -8,8 +8,8 @@ datasource db {
 }
 
 model URL {
-  id              String      @id @default(cuid(2))
-  original_url    String      
+  id              String      @id @default(uuid())
+  original_url    String
   slug            String      @unique
   created_at      DateTime    @default(now())
 
