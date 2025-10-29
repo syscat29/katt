@@ -1,14 +1,34 @@
 'use server'
 
 import generateShortcode from '../lib/generateShortcode'
+import { MAX_SHORTCODE_ATTEMPTS } from '../lib/constants'
 import prisma from './prisma'
 
-export async function createShortUrl(url: string) {
-  try {
-    const shortcode = generateShortcode()
+let shortcode: string
+let attempts: number = 0
 
-    // Check if shortcode exists
-    
+export async function createShortUrl(url: string) {
+  while (attempts < MAX_SHORTCODE_ATTEMPTS) {
+    shortcode = generateShortcode()
+
+    const isShortcodeValid = await prisma.uRL.findUnique({
+      where: { slug: shortcode },
+    })
+
+    if (!isShortcodeValid) {
+      break
+    }
+
+    attempts++
+  }
+
+  if (attempts === MAX_SHORTCODE_ATTEMPTS) {
+    throw new Error(
+      'Failed to generate a unique shortcode after multiple attempts.',
+    )
+  }
+
+  try {
     const payload = {
       original_url: url,
       slug: shortcode,
@@ -33,7 +53,7 @@ export async function getShortLink(slug: string): Promise<string> {
   try {
     const url = await prisma.uRL.findUnique({
       where: { slug },
-      cacheStrategy: { ttl: 7200, swr: 300 },
+      cacheStrategy: { ttl: 31536000 },
     })
 
     if (!url) {

@@ -1,0 +1,1 @@
+export const MAX_SHORTCODE_ATTEMPTS = 10

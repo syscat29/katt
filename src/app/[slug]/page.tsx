@@ -1,6 +1,6 @@
 import { getShortLink } from '@/src/server/actions'
 import Link from 'next/link'
-import { redirect, RedirectType } from 'next/navigation'
+import { permanentRedirect, RedirectType } from 'next/navigation'
 
 export default async function Shortlink({
   params,
@@ -11,7 +11,7 @@ export default async function Shortlink({
   const link = await getShortLink(slug)
 
   if (link) {
-    redirect(link, RedirectType.push)
+    permanentRedirect(link, RedirectType.push)
   }
 
   return (
