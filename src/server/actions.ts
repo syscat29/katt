@@ -7,6 +7,8 @@ export async function createShortUrl(url: string) {
   try {
     const shortcode = generateShortcode()
 
+    // Check if shortcode exists
+    
     const payload = {
       original_url: url,
       slug: shortcode,
@@ -29,7 +31,10 @@ export async function createShortUrl(url: string) {
 
 export async function getShortLink(slug: string): Promise<string> {
   try {
-    const url = await prisma.uRL.findUnique({ where: { slug } })
+    const url = await prisma.uRL.findUnique({
+      where: { slug },
+      cacheStrategy: { ttl: 7200, swr: 300 },
+    })
 
     if (!url) {
       return ''
